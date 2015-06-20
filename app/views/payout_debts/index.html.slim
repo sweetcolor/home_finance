@@ -1,0 +1,27 @@
+h1 Listing payout_debts
+
+table
+  thead
+    tr
+      th Sum
+      th Exchange rate
+      th Currency
+      th Debt
+      th
+      th
+      th
+
+  tbody
+    - @payout_debts.each do |payout_debt|
+      tr
+        td = payout_debt.sum
+        td = payout_debt.exchange_rate
+        td = payout_debt.currency.name
+        td = payout_debt.debt.name
+        td = link_to 'Show', payout_debt
+        td = link_to 'Edit', edit_payout_debt_path(payout_debt)
+        td = link_to 'Destroy', payout_debt, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Payout dep', new_payout_debt_path

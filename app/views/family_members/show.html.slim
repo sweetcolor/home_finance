@@ -1,0 +1,20 @@
+p#notice = notice
+
+
+
+p
+  strong login:
+  = @family_member.family_member_login
+p
+  strong Name:
+  = @family_member.name
+p
+  strong Surname:
+  = @family_member.surname
+p
+  strong Middle name:
+  = @family_member.middle_name
+
+= link_to 'Edit', edit_family_member_path(@family_member)
+'|
+= link_to 'Back', family_members_path

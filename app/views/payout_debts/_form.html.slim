@@ -1,0 +1,21 @@
+= form_for @payout_debt do |f|
+  - if @payout_debt.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@payout_debt.errors.count, "error")} prohibited this payout_debt from being saved:"
+      ul
+        - @payout_debt.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :sum
+    = f.text_field :sum
+  .field
+    = f.label :exchange_rate
+    = f.text_field :exchange_rate
+  .field
+    = f.label :currency
+    = f.select :currency_id, @currencies.collect { |currency| [currency.name, currency.id] }
+  .field
+    = f.label :debt
+    = f.select :debt_id, @debts.collect { |debt| [debt.name, debt.id] }
+  .actions = f.submit

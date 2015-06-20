@@ -1,0 +1,30 @@
+= form_for @currency_transaction do |f|
+  - if @currency_transaction.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@currency_transaction.errors.count, "error")} prohibited this currency_transaction from being saved:"
+      ul
+        - @currency_transaction.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :date
+    = f.date_select :date
+  .field
+    = f.label :sum
+    = f.text_field :sum
+  .field
+    = f.label :description
+    = f.text_area :description
+  .field.hide_block
+    = f.label :type
+    = f.select :type, [[nil, @currency_transaction.type]]
+  .field
+    = f.label :category_id
+    = f.select(:category_id, @categories.collect { |category| [category.name, category.id] })
+  .field
+    = f.label :account_id
+    = f.select(:account_id, @accounts.collect { |account| [account.name, account.id] })
+  .field
+    = f.label :currency_id
+    = f.select(:currency_id, @currencies.collect { |currency| [currency.name, currency.id] })
+  .actions = f.submit

@@ -1,0 +1,18 @@
+p#notice = notice
+
+p
+  strong Sum:
+  = @payout_debt.sum
+p
+  strong Exchange rate:
+  = @payout_debt.exchange_rate
+p
+  strong Currency:
+  = @payout_debt.currency.name
+p
+  strong Debt:
+  = @payout_debt.debt.name
+
+= link_to 'Edit', edit_payout_debt_path(@payout_debt)
+'|
+= link_to 'Back', payout_debts_path

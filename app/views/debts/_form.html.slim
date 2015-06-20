@@ -1,0 +1,36 @@
+= form_for @debt do |f|
+  - if @debt.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@debt.errors.count, "error")} prohibited this debt from being saved:"
+      ul
+        - @debt.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :total_sum
+    = f.text_field :total_sum
+  .field
+    = f.label :debt_date
+    = f.date_select :debt_date
+  .field
+    = f.label :partial_repay_date
+    = f.date_select :partial_repay_date
+  .field
+    = f.label :full_repay_date
+    = f.date_select :full_repay_date
+  .field
+    = f.label :status
+    = f.check_box :status
+  .field.hide_block
+    = f.label :type
+    = f.select :type, [[nil, @debt.type]]
+  .field
+    = f.label :account_id
+    = f.select(:account_id, @accounts.collect { |account| [account.name, account.id] })
+  .field
+    = f.label :currency_id
+    = f.select(:currency_id, @currencies.collect { |currency| [currency.name, currency.id] })
+  .field
+    = f.label :позичальник
+    = f.select(:family_member_login, @family_members.collect { |family_member| [family_member.name, family_member.family_member_login] })
+  .actions = f.submit

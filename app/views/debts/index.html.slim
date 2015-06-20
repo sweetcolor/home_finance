@@ -1,0 +1,37 @@
+h1 Listing debts
+
+table
+  thead
+    tr
+      th Total sum
+      th Debt date
+      th Partial repay date
+      th Full repay date
+      th Status
+      th Type
+      th Account
+      th Currency
+      th Позичальник
+      th
+      th
+      th
+
+  tbody
+    - @debts.each do |debt|
+      tr
+        td = debt.total_sum
+        td = debt.debt_date
+        td = debt.partial_repay_date
+        td = debt.full_repay_date
+        td = debt.status
+        td = debt.type
+        td = debt.account.name
+        td = debt.currency.name
+        td = debt.family_member.name
+        td = link_to 'Show', debt
+        td = link_to 'Edit', edit_debt_path(debt)
+        td = link_to 'Destroy', debt, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Debt', new_debt_path

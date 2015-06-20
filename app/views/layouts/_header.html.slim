@@ -1,0 +1,35 @@
+nav.navbar.navbar-inverse.navbar-fixed-top
+  .container
+    .navbar-header
+      = link_to 'Home', root_path, class: 'navbar-brand', id: 'home'
+    .collapse.navbar-collapse
+      - if sign_in?
+        span#welcome
+          | Welcome #{link_to current_user[:family_member_login], current_user}
+      ul.nav.navbar-nav
+        - if sign_in?
+          li = link_to 'Sing out', signout_path, method: 'delete'
+        - else
+          li = link_to 'Create new user', new_family_member_path
+          li = link_to 'Sing in', new_session_path
+      - if sign_in?
+        p
+          span.main_menu = link_to 'Створити сім’ю', new_family_path
+          span.main_menu = link_to 'Створити новий рахунок', new_account_path
+          span.main_menu = link_to 'Додати новий дохід', new_currency_transaction_path(type: :доходи)
+          span.main_menu = link_to 'Додати нові витрати', new_currency_transaction_path(type: :витрати)
+          span.main_menu = link_to 'Взяти новий борг', new_debt_path(type: :борг)
+          span.main_menu = link_to 'Видати нову позику', new_debt_path(type: :позика)
+          span.main_menu = link_to 'Внести суму для погашення боргу', new_payout_debt_path
+        p
+          - if @current_family
+            span.main_menu = link_to 'Редагувати сім’ю', edit_family_path(current_family)
+          - else
+            span.main_menu = link_to 'Створити сім’ю', new_family_path
+          span.main_menu = link_to 'Переглянути рахуноки', accounts_path
+          span.main_menu = link_to 'Переглянути доходи', currency_transactions_path(type: :доходи)
+          span.main_menu = link_to 'Переглянути витрати', currency_transactions_path(type: :витрати)
+          span.main_menu = link_to 'Переглянуту борги', debts_path(type: :борг)
+          span.main_menu = link_to 'Переглянути позики', debts_path(type: :позика)
+          span.main_menu = link_to 'Переглянути погашення боргів', payout_debts_path(type: :борг)
+          span.main_menu = link_to 'Переглянути погашення позик', payout_debts_path(type: :позика)

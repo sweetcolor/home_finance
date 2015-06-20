@@ -1,0 +1,21 @@
+= form_for @admin do |f|
+  - if @admin.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@admin.errors.count, "error")} prohibited this admin from being saved:"
+      ul
+        - @admin.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :admin_login
+    = f.text_field :admin_login
+  .field
+    = f.label :password
+    = f.password_field :password
+  .field
+    = f.label :password_confirmation
+    = f.password_field :password_confirmation
+  .field
+    = f.label :email
+    = f.text_field :email
+  .actions = f.submit

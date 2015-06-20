@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  total_sum: 9.99
+  debt_date: 2015-06-16
+  partial_repay_date: 2015-06-16
+  full_repay_date: 2015-06-16
+  status: false
+  type: 
+
+two:
+  total_sum: 9.99
+  debt_date: 2015-06-16
+  partial_repay_date: 2015-06-16
+  full_repay_date: 2015-06-16
+  status: false
+  type: 

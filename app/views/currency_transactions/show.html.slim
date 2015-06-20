@@ -1,0 +1,27 @@
+p#notice = notice
+
+p
+  strong Date:
+  = @currency_transaction.date
+p
+  strong Sum:
+  = @currency_transaction.sum
+p
+  strong Description:
+  = @currency_transaction.description
+p
+  strong Type:
+  = @currency_transaction.type
+p
+  strong Category:
+  = @currency_transaction.category.name
+p
+  strong Account:
+  = @currency_transaction.account.name
+p
+  strong Currency:
+  = @currency_transaction.currency.name
+
+= link_to 'Edit', edit_currency_transaction_path(@currency_transaction)
+'|
+= link_to 'Back', currency_transactions_path

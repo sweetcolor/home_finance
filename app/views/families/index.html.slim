@@ -1,0 +1,21 @@
+h1 Listing families
+
+table
+  thead
+    tr
+      th Name
+      th
+      th
+      th
+
+  tbody
+    - @families.each do |family|
+      tr
+        td = family.name
+        td = link_to 'Show', family
+        td = link_to 'Edit', edit_family_path(family)
+        td = link_to 'Destroy', family, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Family', new_family_path

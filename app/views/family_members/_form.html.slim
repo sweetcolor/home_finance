@@ -1,0 +1,34 @@
+= form_for @family_member do |f|
+  - if @family_member.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@family_member.errors.count, "error")} prohibited this family_member from being saved:"
+      ul
+        - @family_member.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :family_member_login
+    = f.text_field :family_member_login
+  .field
+    = f.label :password
+    = f.password_field :password
+  .field
+    = f.label :password_confirmation
+    = f.password_field :password_confirmation
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :surname
+    = f.text_field :surname
+  .field
+    = f.label :middle_name
+    = f.text_field :middle_name
+  .field
+    = f.label :family_admin
+    = f.check_box :family_admin
+  .field
+    = f.label :family
+    = f.select(:family_id, [['---', nil]] + @families.collect {|family| [ family.name, family.id ] })
+  
+  .actions = f.submit

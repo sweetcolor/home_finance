@@ -1,0 +1,35 @@
+h1 Listing currency_transactions
+
+table
+  thead
+    tr
+      th Date
+      th Sum
+      th Description
+      th Type
+      th User
+      th Category
+      th Account
+      th Currency
+      th
+      th
+      th
+
+  tbody
+    - @currency_transactions.each do |currency_transaction|
+      tr
+        td = currency_transaction.date
+        td = currency_transaction.sum
+        td = currency_transaction.description
+        td = currency_transaction.type
+        td = currency_transaction.account.family_member.full_name
+        td = currency_transaction.category.name
+        td = currency_transaction.account.name
+        td = currency_transaction.currency.name
+        td = link_to 'Show', currency_transaction
+        td = link_to 'Edit', edit_currency_transaction_path(currency_transaction)
+        td = link_to 'Destroy', currency_transaction, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Currency transaction', new_currency_transaction_path

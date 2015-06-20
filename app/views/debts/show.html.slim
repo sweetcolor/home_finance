@@ -1,0 +1,33 @@
+p#notice = notice
+
+p
+  strong Total sum:
+  = @debt.total_sum
+p
+  strong Debt date:
+  = @debt.debt_date
+p
+  strong Partial repay date:
+  = @debt.partial_repay_date
+p
+  strong Full repay date:
+  = @debt.full_repay_date
+p
+  strong Status:
+  = @debt.status
+p
+  strong Type:
+  = @debt.type
+p
+  strong Account:
+  = @debt.account.name
+p
+  strong Currency:
+  = @debt.currency.name
+p
+  strong Позичальник:
+  = @debt.family_member_login
+
+= link_to 'Edit', edit_debt_path(@debt)
+'|
+= link_to 'Back', debts_path
