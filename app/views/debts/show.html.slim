@@ -19,15 +19,15 @@ p
   strong Type:
   = @debt.type
 p
-  strong Account:
-  = @debt.account.name
+  strong Видав у борг:
+  = @debt.account_give_loan.family_member.name + '->' + @debt.account_give_loan.name
+p
+  strong Взяв у борг:
+  = @debt.account_borrow_debt.family_member.name + '->' + @debt.account_borrow_debt.name
 p
   strong Currency:
   = @debt.currency.name
-p
-  strong Позичальник:
-  = @debt.family_member_login
 
 = link_to 'Edit', edit_debt_path(@debt)
 '|
-= link_to 'Back', debts_path
+= link_to 'Back', debts_path(type: @debt.type)

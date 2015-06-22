@@ -14,5 +14,9 @@ nav.navbar.navbar-inverse.navbar-fixed-top
           li = link_to 'Sing in admin', new_session_path
       - if sign_in?
         p
-          span.main_menu = link_to 'Створити нову категорію', new_category_path
+          span.main_menu = link_to 'Створити нову категорію доходів', new_category_path(type: :доходи)
+          span.main_menu = link_to 'Створити нову категорію витрат', new_category_path(type: :витрати)
           span.main_menu = link_to 'Створити нову валюту', new_currency_path
+        p
+          span.main_menu = link_to 'Перглянути категорії', categories_path
+          span.main_menu = link_to 'Переглянути валюти', currencies_path

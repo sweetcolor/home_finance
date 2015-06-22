@@ -18,19 +18,16 @@
   .field
     = f.label :full_repay_date
     = f.date_select :full_repay_date
-  .field
-    = f.label :status
-    = f.check_box :status
   .field.hide_block
     = f.label :type
     = f.select :type, [[nil, @debt.type]]
   .field
-    = f.label :account_id
-    = f.select(:account_id, @accounts.collect { |account| [account.name, account.id] })
+    = f.label 'Видав в борг з рахунку'
+    = f.select(:give_loan_id, @give_loans.collect { |account| [account.name, account.id] })
+  .field
+    = f.label 'Взяв у борг на рахунок'
+    = f.select(:borrow_debt_id, @borrow_debts.collect { |account| [account.name, account.id] })
   .field
     = f.label :currency_id
     = f.select(:currency_id, @currencies.collect { |currency| [currency.name, currency.id] })
-  .field
-    = f.label :позичальник
-    = f.select(:family_member_login, @family_members.collect { |family_member| [family_member.name, family_member.family_member_login] })
   .actions = f.submit

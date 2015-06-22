@@ -9,6 +9,9 @@
   .field
     = f.label :name
     = f.text_field :name
+  .field.hide_block
+    = f.label :type
+    = f.select :type, [[nil, @category.type]]
   .field
     = f.label :parent_category_id
     = f.select(:parent_category_id, [['---', nil]] + @categories.collect { |category| [category.name, category.id] })

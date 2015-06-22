@@ -17,6 +17,7 @@ class CategoriesController < ApplicationController
   # GET /categories/new
   def new
     @category = Category.new
+    @category.type = params[:type]
   end
 
   # GET /categories/1/edit
@@ -71,11 +72,11 @@ class CategoriesController < ApplicationController
     end
 
   def set_categories
-    @categories = Category.all
+    @categories = Category.where type: (params[:type].present? ? params[:type] : @category.type)
   end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def category_params
-      params.require(:category).permit(:name, :parent_category_id)
+      params.require(:category).permit(:name, :parent_category_id, :type)
     end
 end

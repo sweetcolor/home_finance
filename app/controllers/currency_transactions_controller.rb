@@ -1,12 +1,20 @@
 class CurrencyTransactionsController < ApplicationController
   before_action :set_currency_transaction, only: [:show, :edit, :update, :destroy]
-  before_action :set_variables, only: [:new, :create, :edit, :update]
+  before_action :set_variables, only: [:new, :create, :edit, :update, :index]
 
   # GET /currency_transactions
   # GET /currency_transactions.json
   def index
-    @currency_transactions = CurrencyTransaction.all.where type: params[:type],
-                                                           account_id: Account.current_family_member(current_user)
+    @currency_transactions = CurrencyTransaction.all.where account_id: Account.current_family_member(current_user)
+    if (params[:category].present?) && (not params[:category][:id].blank?)
+      category = Category.find(params[:category][:id])
+      @type = category.type
+      @currency_transactions = @currency_transactions.where(type: @type, category_id: Category.child_categories(category))
+    else
+      @type = params[:type] || params[:category][:type]
+      @currency_transactions = @currency_transactions.where(type: @type)
+    end
+    @total_sum = @currency_transactions.sum :sum
   end
 
   # GET /currency_transactions/1
@@ -74,7 +82,6 @@ class CurrencyTransactionsController < ApplicationController
     def set_variables
       @categories = Category.all
       @accounts = Account.current_family_member(current_user)
-      @currencies = Currency.all
     end
 
     def complete_record(array_records)

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150616185745) do
+ActiveRecord::Schema.define(version: 20150621224830) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20150616185745) do
     t.datetime "created_at",                                             null: false
     t.datetime "updated_at",                                             null: false
     t.string   "family_member_login"
+    t.integer  "currency_id"
   end
 
   create_table "admins", primary_key: "admin_login", force: :cascade do |t|
@@ -33,12 +34,8 @@ ActiveRecord::Schema.define(version: 20150616185745) do
     t.datetime "updated_at",                 null: false
   end
 
-  create_table "categories", force: :cascade do |t|
-    t.string   "name",               limit: 30, null: false
-    t.integer  "parent_category_id"
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
-  end
+# Could not dump table "categories" because of following StandardError
+#   Unknown type 'category_type' for column 'type'
 
   create_table "currencies", force: :cascade do |t|
     t.string   "name"
@@ -47,29 +44,11 @@ ActiveRecord::Schema.define(version: 20150616185745) do
     t.string   "admin_login"
   end
 
-  create_table "currency_transactions", force: :cascade do |t|
-    t.date    "date",                                null: false
-    t.decimal "sum",         precision: 6, scale: 2, null: false
-    t.text    "description"
-    t.string  "type",                                null: false
-    t.integer "category_id"
-    t.integer "account_id"
-    t.integer "currency_id"
-  end
+# Could not dump table "currency_transactions" because of following StandardError
+#   Unknown type 'currency_transaction_type' for column 'type'
 
-  create_table "debts", force: :cascade do |t|
-    t.decimal  "total_sum",           precision: 6, scale: 2
-    t.date     "debt_date"
-    t.date     "partial_repay_date"
-    t.date     "full_repay_date"
-    t.boolean  "status"
-    t.string   "type"
-    t.datetime "created_at",                                  null: false
-    t.datetime "updated_at",                                  null: false
-    t.integer  "account_id"
-    t.integer  "currency_id"
-    t.string   "family_member_login"
-  end
+# Could not dump table "debts" because of following StandardError
+#   Unknown type 'debt_type' for column 'type'
 
   create_table "families", force: :cascade do |t|
     t.string   "name",       limit: 30, null: false
@@ -99,15 +78,15 @@ ActiveRecord::Schema.define(version: 20150616185745) do
     t.integer  "currency_id"
   end
 
+  add_foreign_key "accounts", "currencies"
   add_foreign_key "accounts", "family_members", column: "family_member_login", primary_key: "family_member_login"
   add_foreign_key "categories", "categories", column: "parent_category_id"
   add_foreign_key "currencies", "admins", column: "admin_login", primary_key: "admin_login"
   add_foreign_key "currency_transactions", "accounts"
   add_foreign_key "currency_transactions", "categories"
-  add_foreign_key "currency_transactions", "currencies"
-  add_foreign_key "debts", "accounts"
+  add_foreign_key "debts", "accounts", column: "borrow_debt_id"
+  add_foreign_key "debts", "accounts", column: "give_loan_id"
   add_foreign_key "debts", "currencies"
-  add_foreign_key "debts", "family_members", column: "family_member_login", primary_key: "family_member_login"
   add_foreign_key "family_members", "families"
   add_foreign_key "payout_debts", "currencies"
   add_foreign_key "payout_debts", "debts"

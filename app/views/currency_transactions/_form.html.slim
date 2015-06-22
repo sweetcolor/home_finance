@@ -24,7 +24,4 @@
   .field
     = f.label :account_id
     = f.select(:account_id, @accounts.collect { |account| [account.name, account.id] })
-  .field
-    = f.label :currency_id
-    = f.select(:currency_id, @currencies.collect { |currency| [currency.name, currency.id] })
   .actions = f.submit

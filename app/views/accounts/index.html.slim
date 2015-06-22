@@ -5,6 +5,7 @@ table
     tr
       th Name
       th Current sum
+      th Currency
       th
       th
       th
@@ -14,6 +15,7 @@ table
       tr
         td = account.name
         td = account.current_sum
+        td = account.currency.name
         td = link_to 'Show', account
         td = link_to 'Edit', edit_account_path(account)
         td = link_to 'Destroy', account, data: {:confirm => 'Are you sure?'}, :method => :delete

@@ -1,5 +1,16 @@
 h1 Listing currency_transactions
 
+p Select Category
+= form_for :category, url: currency_transactions_path, method: :get do |f|
+  .field.hide_block
+    = f.label :type
+    = f.select :type, [[nil, @type]]
+  .field
+    = f.label :Категорії
+    = f.select(:id, [['---', nil]] + @categories.collect { |category| [category.name, category.id] })
+  .actions = f.submit('NAME' => 'Select by category')
+p Total sum
+= @total_sum
 table
   thead
     tr
@@ -10,7 +21,6 @@ table
       th User
       th Category
       th Account
-      th Currency
       th
       th
       th
@@ -25,7 +35,6 @@ table
         td = currency_transaction.account.family_member.full_name
         td = currency_transaction.category.name
         td = currency_transaction.account.name
-        td = currency_transaction.currency.name
         td = link_to 'Show', currency_transaction
         td = link_to 'Edit', edit_currency_transaction_path(currency_transaction)
         td = link_to 'Destroy', currency_transaction, data: {:confirm => 'Are you sure?'}, :method => :delete

@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class DebtsController < ApplicationController
   before_action :set_debt, only: [:show, :edit, :update, :destroy]
   before_action :set_variables, only: [:new, :create, :edit, :update]
@@ -27,6 +28,7 @@ class DebtsController < ApplicationController
   # POST /debts.json
   def create
     @debt = Debt.new(debt_params)
+    @debt.status = false
 
     respond_to do |format|
       if @debt.save
@@ -70,14 +72,19 @@ class DebtsController < ApplicationController
     end
 
     def set_variables
-      @accounts = Account.current_family_member(current_user)
+      @give_loans =
+        if params[:type].eql? 'позика'.force_encoding(Encoding::UTF_8)
+          Account.current_family_member(current_user)
+        else
+          Account.not_current_family_member(current_user)
+        end
+      @borrow_debts = Account.all - @give_loans
       @currencies = Currency.all
-      @family_members = FamilyMember.where.not family_member_login: current_user.family_member_login
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def debt_params
-      params.require(:debt).permit(:total_sum, :debt_date, :partial_repay_date, :full_repay_date, :status, :type,
-                                   :account_id, :currency_id, :family_member_login)
+      params.require(:debt).permit(:total_sum, :debt_date, :partial_repay_date, :full_repay_date, :type,
+                                   :borrow_debt_id, :currency_id, :give_loan_id)
     end
 end

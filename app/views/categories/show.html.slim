@@ -4,9 +4,12 @@ p
   strong Name:
   = @category.name
 p
+  strong Type:
+  = @category.type
+p
   - if @parent_category
-    strong Parent category:
-      = @category.parent_category_id
+    strong Parent category
+    = @category.category.name
   - else
     strong Main category
 

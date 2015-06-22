@@ -6,10 +6,10 @@ class PayoutDebtsController < ApplicationController
   # GET /payout_debts.json
   def index
     current_user
-    if params[:type] == 'борг'
+    if params[:type] == 'борг'.force_encoding(Encoding::UTF_8)
       @payout_debts = PayoutDebt.all.where debt_id: Debt.current_family_member_debts(@current_user)
     else
-      @payout_debts = PayoutDebt.all.where debt_id: Debt.where(account_id: Account.current_family_member(@current_user))
+      @payout_debts = PayoutDebt.all.where debt_id: Debt.current_family_member_loans(@current_user)
     end
   end
 

@@ -12,4 +12,7 @@
   .field
     = f.label :current_sum
     = f.text_field :current_sum
+  .field
+    = f.label :currency_id
+    = f.select(:currency_id, @currencies.collect { |currency| [currency.name, currency.id] })
   .actions = f.submit

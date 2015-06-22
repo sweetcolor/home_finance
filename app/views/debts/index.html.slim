@@ -9,9 +9,9 @@ table
       th Full repay date
       th Status
       th Type
-      th Account
+      th Видав у борг
+      th Взяв у борг
       th Currency
-      th Позичальник
       th
       th
       th
@@ -25,9 +25,9 @@ table
         td = debt.full_repay_date
         td = debt.status
         td = debt.type
-        td = debt.account.name
+        td = debt.account_give_loan.name
         td = debt.currency.name
-        td = debt.family_member.name
+        td = debt.account_borrow_debt.name
         td = link_to 'Show', debt
         td = link_to 'Edit', edit_debt_path(debt)
         td = link_to 'Destroy', debt, data: {:confirm => 'Are you sure?'}, :method => :delete
